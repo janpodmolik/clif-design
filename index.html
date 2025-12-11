@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clif - iOS Prototype Variants</title>
+  <link rel="stylesheet" href="./src/styles/main.css">
+  <style>
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    
+    .header h1 {
+      font-size: 48px;
+      font-weight: 700;
+      color: white;
+      margin: 0 0 12px 0;
+      letter-spacing: -1px;
+    }
+    
+    .header p {
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.6);
+      margin: 0;
+    }
+    
+    .variants-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+      max-width: 1200px;
+      width: 100%;
+    }
+    
+    .variant-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      padding: 24px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: white;
+    }
+    
+    .variant-card:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-4px);
+    }
+    
+    .variant-preview {
+      width: 100%;
+      aspect-ratio: 393 / 852;
+      background: linear-gradient(180deg, #87CEEB 0%, #6BB3D9 50%, #4A90A4 100%);
+      border-radius: 16px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .variant-preview img {
+      max-height: 60%;
+      object-fit: contain;
+    }
+    
+    .variant-preview::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+    }
+    
+    .variant-card h2 {
+      font-size: 20px;
+      font-weight: 600;
+      margin: 0 0 8px 0;
+    }
+    
+    .variant-card p {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.5);
+      margin: 0;
+    }
+    
+    .variant-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      background: rgba(52, 199, 89, 0.2);
+      color: #34C759;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    
+    .variant-badge.coming-soon {
+      background: rgba(255, 149, 0, 0.2);
+      color: #FF9500;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <h1>Clif</h1>
+    <p>iOS Screen Time Tracker - Design Variants</p>
+  </header>
+  
+  <div class="variants-grid">
+    <a href="./src/themes/liquid-glass.html" class="variant-card">
+      <div class="variant-preview">
+        <img src="./public/assets/home.png" alt="Clif character">
+      </div>
+      <span class="variant-badge">Active</span>
+      <h2>Liquid Glass</h2>
+      <p>iOS 26 inspired glassmorphism design with blur effects and translucent surfaces.</p>
+    </a>
+    
+    <div class="variant-card" style="opacity: 0.5; cursor: not-allowed;">
+      <div class="variant-preview" style="background: linear-gradient(180deg, #E8F4FD 0%, #D1E9F6 100%);">
+        <img src="./public/assets/home.png" alt="Clif character">
+      </div>
+      <span class="variant-badge coming-soon">Coming Soon</span>
+      <h2>Flat Design</h2>
+      <p>Clean, minimal design with solid colors and sharp visual hierarchy.</p>
+    </div>
+    
+    <div class="variant-card" style="opacity: 0.5; cursor: not-allowed;">
+      <div class="variant-preview" style="background: linear-gradient(180deg, #FFF5E6 0%, #FFE4C4 100%);">
+        <img src="./public/assets/home.png" alt="Clif character">
+      </div>
+      <span class="variant-badge coming-soon">Coming Soon</span>
+      <h2>Hand-Drawn</h2>
+      <p>Organic, sketchy style matching the illustration aesthetic.</p>
+    </div>
+  </div>
+</body>
+</html>

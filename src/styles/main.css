@@ -1,0 +1,151 @@
+@import "tailwindcss";
+
+/* Custom theme configuration for Tailwind v4 */
+@theme {
+  /* Glass effect colors */
+  --color-glass: rgba(255, 255, 255, 0.2);
+  --color-glass-border: rgba(255, 255, 255, 0.3);
+  --color-glass-dark: rgba(0, 0, 0, 0.1);
+  
+  /* Sky gradient colors */
+  --color-sky-light: #87CEEB;
+  --color-sky-mid: #6BB3D9;
+  --color-sky-deep: #4A90A4;
+  
+  /* iOS-like border radius */
+  --radius-ios: 16px;
+  --radius-ios-lg: 24px;
+  --radius-ios-xl: 38px;
+  --radius-iphone: 47px;
+  
+  /* Safe area defaults (for desktop preview) */
+  --safe-area-top: 59px;
+  --safe-area-bottom: 34px;
+  
+  /* iPhone dimensions */
+  --iphone-width: 393px;
+  --iphone-height: 852px;
+}
+
+/* Base reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* iPhone frame wrapper */
+.iphone-frame {
+  width: var(--iphone-width);
+  height: var(--iphone-height);
+  border-radius: var(--radius-iphone);
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(180deg, var(--color-sky-light) 0%, var(--color-sky-mid) 50%, var(--color-sky-deep) 100%);
+  box-shadow: 
+    0 0 0 12px #1a1a1a,
+    0 0 0 14px #333,
+    0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+/* Dynamic Island */
+.dynamic-island {
+  position: absolute;
+  top: 11px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 126px;
+  height: 37px;
+  background: #000;
+  border-radius: 24px;
+  z-index: 100;
+}
+
+/* Safe area container */
+.safe-area {
+  padding-top: var(--safe-area-top);
+  padding-bottom: var(--safe-area-bottom);
+  padding-left: env(safe-area-inset-left, 0);
+  padding-right: env(safe-area-inset-right, 0);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Tab bar */
+.tab-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: calc(83px + var(--safe-area-bottom));
+  padding-bottom: var(--safe-area-bottom);
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  padding-top: 8px;
+}
+
+.tab-bar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 16px;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.tab-bar-item svg {
+  width: 24px;
+  height: 24px;
+}
+
+.tab-bar-item span {
+  font-size: 10px;
+  font-weight: 500;
+}
+
+/* Glass card component */
+.glass-card {
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  background: var(--color-glass);
+  border: 1px solid var(--color-glass-border);
+  border-radius: var(--radius-ios-lg);
+}
+
+/* Progress bar */
+.progress-bar {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #34C759 0%, #30D158 100%);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+/* Screen time display */
+.screen-time-value {
+  font-size: 48px;
+  font-weight: 700;
+  letter-spacing: -2px;
+  line-height: 1;
+}
+
+.screen-time-label {
+  font-size: 15px;
+  font-weight: 400;
+  opacity: 0.7;
+}
