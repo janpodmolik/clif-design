@@ -70,12 +70,12 @@
       overflow: hidden;
       position: relative;
     }
-    
+
     .variant-preview img {
       max-height: 60%;
       object-fit: contain;
     }
-    
+
     .variant-preview::after {
       content: '';
       position: absolute;
@@ -85,6 +85,26 @@
       height: 60px;
       background: rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(10px);
+    }
+
+    /* Live iframe preview */
+    .variant-preview-live {
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      overflow: hidden;
+      position: relative;
+      background: #1a1a1a;
+    }
+
+    .variant-preview-live iframe {
+      width: 200%;
+      height: 200%;
+      border: none;
+      transform: scale(0.5);
+      transform-origin: top left;
+      pointer-events: none;
     }
     
     .variant-card h2 {
@@ -124,8 +144,8 @@
   
   <div class="variants-grid">
     <a href="./src/themes/liquid-glass.html" class="variant-card">
-      <div class="variant-preview">
-        <img src="./public/assets/home.png" alt="Clif character">
+      <div class="variant-preview-live">
+        <iframe src="./src/themes/liquid-glass.html" title="Liquid Glass Preview"></iframe>
       </div>
       <span class="variant-badge">Active</span>
       <h2>Liquid Glass</h2>

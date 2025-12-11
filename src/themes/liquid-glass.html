@@ -12,26 +12,148 @@
       min-height: 100vh;
       background: #1a1a1a;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       padding: 20px;
+      gap: 16px;
     }
-    
+
+    /* Back button */
+    .back-btn {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .back-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+    }
+
+    .back-btn svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    /* iOS Status Bar */
+    .ios-status-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 44px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: 0 24px 8px 24px;
+      z-index: 50;
+      color: #000;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .iphone-frame.night .ios-status-bar {
+      color: #fff;
+    }
+
+    .status-bar-time {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+    }
+
+    .status-bar-left {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      width: 70px;
+    }
+
+    .status-bar-right {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      width: 70px;
+      justify-content: flex-end;
+    }
+
+    .status-bar-right svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    .battery {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .battery-icon {
+      width: 22px;
+      height: 11px;
+      border: 1.5px solid currentColor;
+      border-radius: 3px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 1.5px;
+    }
+
+    .battery-icon::after {
+      content: '';
+      position: absolute;
+      right: -4px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 2px;
+      height: 5px;
+      background: currentColor;
+      border-radius: 0 1px 1px 0;
+    }
+
+    .battery-level {
+      height: 100%;
+      width: 80%;
+      background: currentColor;
+      border-radius: 1px;
+    }
+
     /* Liquid Glass specific styles */
     .lg-tab-bar {
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(60, 60, 60, 0.7);
       backdrop-filter: blur(40px);
       -webkit-backdrop-filter: blur(40px);
-      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     }
-    
+
     .lg-tab-item {
-      color: rgba(255, 255, 255, 0.5);
+      color: rgba(255, 255, 255, 0.6);
     }
-    
+
     .lg-tab-item.active {
       color: white;
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.18);
     }
     
     .lg-card {
@@ -47,143 +169,311 @@
     .scene-container {
       flex: 1;
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: center;
       position: relative;
-      padding: 20px;
+      padding: 12px;
+      padding-bottom: 0;
     }
-    
+
     .cliff-image {
-      max-height: 100%;
-      max-width: 100%;
+      max-height: 80%;
+      max-width: 90%;
       object-fit: contain;
-      filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));
+      filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.3));
+      margin-bottom: -20px;
     }
-    
+
     .status-card {
       position: absolute;
-      top: 20px;
-      left: 20px;
-      right: 20px;
-      padding: 16px 20px;
-      border-radius: 20px;
+      top: 12px;
+      left: 12px;
+      right: 12px;
+      padding: 12px 14px;
+      border-radius: 16px;
     }
     
     .status-header {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
     }
-    
+
     .time-display {
       color: white;
     }
-    
+
     .time-value {
-      font-size: 36px;
+      font-size: 28px;
       font-weight: 700;
-      letter-spacing: -1.5px;
+      letter-spacing: -1px;
       line-height: 1;
     }
-    
+
     .time-label {
-      font-size: 13px;
+      font-size: 11px;
       font-weight: 400;
-      opacity: 0.7;
+      opacity: 0.8;
       margin-top: 2px;
     }
-    
-    .status-indicator {
+
+    /* Blocked apps icons */
+    .blocked-apps {
       display: flex;
       align-items: center;
-      gap: 6px;
-      padding: 6px 12px;
-      background: rgba(52, 199, 89, 0.2);
-      border-radius: 100px;
+      margin-left: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      padding: 4px 6px;
     }
-    
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      background: #34C759;
+
+    .blocked-app-icon {
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      object-fit: cover;
+    }
+
+    .blocked-app-icon:not(:first-child) {
+      margin-left: -4px;
+    }
+
+    /* Time row with icons */
+    .time-row {
+      display: flex;
+      align-items: center;
+    }
+
+    /* Settings button */
+    .settings-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background: rgba(255, 255, 255, 0.1);
       border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.2s ease;
     }
-    
-    .status-text {
-      font-size: 13px;
-      font-weight: 600;
-      color: #34C759;
+
+    .settings-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
     }
-    
+
+    .settings-btn svg {
+      width: 18px;
+      height: 18px;
+      stroke: rgba(255, 255, 255, 0.8);
+      fill: none;
+      stroke-width: 1.5;
+    }
+
     .progress-container {
-      margin-top: 4px;
+      margin-top: 2px;
     }
-    
+
     .progress-labels {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
-    
+
     .progress-label {
-      font-size: 11px;
-      color: rgba(255, 255, 255, 0.5);
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.7);
     }
-    
+
     .progress-track {
-      height: 6px;
+      height: 4px;
       background: rgba(255, 255, 255, 0.15);
-      border-radius: 3px;
+      border-radius: 2px;
       overflow: hidden;
     }
-    
+
     .progress-fill {
       height: 100%;
-      width: 35%;
+      width: 27%;
       background: linear-gradient(90deg, #34C759 0%, #30D158 100%);
-      border-radius: 3px;
+      border-radius: 2px;
     }
-    
+
     /* Tab bar icons */
     .tab-icon {
-      width: 24px;
-      height: 24px;
+      width: 20px;
+      height: 20px;
       stroke: currentColor;
       stroke-width: 1.5;
       fill: none;
     }
-    
+
     .tab-label {
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 500;
-      margin-top: 4px;
+      margin-top: 2px;
+    }
+
+    /* Day/Night backgrounds */
+    .iphone-frame.day {
+      background: linear-gradient(180deg, #A8C8E8 0%, #C4D4E4 30%, #E8DDD4 60%, #E8D4C8 100%);
+    }
+
+    .iphone-frame.night {
+      background: linear-gradient(180deg, #0a0a1a 0%, #1a1a4a 30%, #2a4a8a 100%);
+    }
+
+    /* Stars for night mode */
+    .stars {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .iphone-frame.night .stars {
+      opacity: 1;
+    }
+
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 2s ease-in-out infinite;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
+    /* Theme toggle */
+    .theme-toggle {
+      display: flex;
+      gap: 4px;
+      background: rgba(60, 60, 60, 0.8);
+      padding: 4px;
+      border-radius: 12px;
+      margin-top: 24px;
+    }
+
+    .theme-btn {
+      padding: 8px 20px;
+      border: none;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 13px;
+      font-weight: 500;
+      font-family: inherit;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .theme-btn:hover {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .theme-btn.active {
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+    }
+
+    .theme-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .theme-btn.night svg {
+      fill: currentColor;
+      stroke: none;
     }
   </style>
 </head>
 <body>
-  <div class="iphone-frame">
+  <!-- Back to variants -->
+  <a href="/index.html" class="back-btn">
+    <svg viewBox="0 0 24 24">
+      <polyline points="15 18 9 12 15 6"/>
+    </svg>
+    Variants
+  </a>
+
+  <div class="iphone-frame day" id="iphone">
+    <!-- iOS Status Bar -->
+    <div class="ios-status-bar">
+      <div class="status-bar-left">
+        <span>9:41</span>
+      </div>
+      <div class="status-bar-right">
+        <!-- Signal -->
+        <svg viewBox="0 0 18 12">
+          <rect x="0" y="8" width="3" height="4" rx="0.5"/>
+          <rect x="5" y="5" width="3" height="7" rx="0.5"/>
+          <rect x="10" y="2" width="3" height="10" rx="0.5"/>
+          <rect x="15" y="0" width="3" height="12" rx="0.5"/>
+        </svg>
+        <!-- WiFi -->
+        <svg viewBox="0 0 16 12">
+          <path d="M8 9.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/>
+          <path d="M4.5 7.5c2-2 5-2 7 0" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M2 5c3.5-3.5 8.5-3.5 12 0" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <!-- Battery -->
+        <div class="battery">
+          <div class="battery-icon">
+            <div class="battery-level"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="dynamic-island"></div>
-    
+
+    <!-- Stars for night mode -->
+    <div class="stars" id="stars"></div>
+
     <div class="safe-area">
       <!-- Main scene -->
       <div class="scene-container">
         <!-- Status card -->
-        <div class="status-card lg-card">
+        <div class="status-card lg-card" id="status-card">
+          <!-- Top row: settings -->
           <div class="status-header">
             <div class="time-display">
-              <div class="time-value">2h 34m</div>
+              <div class="time-row">
+                <span class="time-value">32m</span>
+                <div class="blocked-apps">
+                  <img src="/assets/icons/instagram.png" alt="Instagram" class="blocked-app-icon">
+                  <img src="/assets/icons/facebook.png" alt="Facebook" class="blocked-app-icon">
+                </div>
+              </div>
               <div class="time-label">Screen time today</div>
             </div>
-            <div class="status-indicator">
-              <div class="status-dot"></div>
-              <span class="status-text">On Track</span>
+            <div class="settings-btn">
+              <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+              </svg>
             </div>
           </div>
+          <!-- Progress -->
           <div class="progress-container">
             <div class="progress-labels">
-              <span class="progress-label">Daily goal: 4h</span>
-              <span class="progress-label">35%</span>
+              <span class="progress-label">Daily limit: 2h</span>
+              <span class="progress-label">27%</span>
             </div>
             <div class="progress-track">
               <div class="progress-fill"></div>
@@ -229,5 +519,57 @@
       </nav>
     </div>
   </div>
+
+  <!-- Theme toggle -->
+  <div class="theme-toggle">
+    <button class="theme-btn day active" onclick="setTheme('day')">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      Day
+    </button>
+    <button class="theme-btn night" onclick="setTheme('night')">
+      <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      Night
+    </button>
+  </div>
+
+  <script>
+    // Generate random stars
+    function generateStars() {
+      const starsContainer = document.getElementById('stars');
+      starsContainer.innerHTML = '';
+
+      for (let i = 0; i < 50; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 60 + '%'; // Only in upper portion
+        const size = Math.random() * 2 + 1;
+        star.style.width = size + 'px';
+        star.style.height = size + 'px';
+        star.style.animationDelay = Math.random() * 2 + 's';
+        starsContainer.appendChild(star);
+      }
+    }
+
+    function setTheme(theme) {
+      const iphone = document.getElementById('iphone');
+      const buttons = document.querySelectorAll('.theme-btn');
+
+      // Update iPhone frame class
+      iphone.classList.remove('day', 'night');
+      iphone.classList.add(theme);
+
+      // Update button states
+      buttons.forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.classList.contains(theme)) {
+          btn.classList.add('active');
+        }
+      });
+    }
+
+    // Generate stars on load
+    generateStars();
+  </script>
 </body>
 </html>
