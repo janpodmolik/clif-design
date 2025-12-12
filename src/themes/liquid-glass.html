@@ -221,13 +221,38 @@
     }
 
     .time-display {
-      color: rgba(0, 0, 0, 0.85);
+      color: rgba(0, 0, 0, 0.65);
+    }
+
+    /* Badges row */
+    .badges-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    /* Streak badge */
+    .streak-badge {
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      padding: 4px 6px;
+      height: 22px;
+      box-sizing: border-box;
+    }
+
+    .streak-value {
+      font-size: 11px;
+      font-weight: 600;
+      line-height: 1;
     }
 
     .time-value {
-      font-size: 28px;
+      font-size: 22px;
       font-weight: 700;
-      letter-spacing: -1px;
+      letter-spacing: -0.5px;
       line-height: 1;
     }
 
@@ -240,21 +265,22 @@
 
     /* Night mode card text */
     .iphone-frame.night .time-display {
-      color: white;
+      color: rgba(255, 255, 255, 0.9);
     }
 
     .iphone-frame.night .time-label {
-      color: rgba(255, 255, 255, 0.7);
+      color: rgba(255, 255, 255, 0.6);
     }
 
     /* Blocked apps icons */
     .blocked-apps {
       display: flex;
       align-items: center;
-      margin-left: 8px;
       background: rgba(255, 255, 255, 0.1);
       border-radius: 6px;
       padding: 4px 6px;
+      height: 22px;
+      box-sizing: border-box;
     }
 
     .blocked-app-icon {
@@ -480,6 +506,11 @@
       transform: translateX(0);
     }
 
+    /* When a screen is pushed (another comes on top), shift it left */
+    .nav-screen.active.pushed {
+      transform: translateX(-30%);
+    }
+
     /* Home screen (base) - always visible, shifts left when pushing */
     .nav-screen.home {
       transform: translateX(0);
@@ -490,7 +521,91 @@
       transform: translateX(-30%);
     }
 
-    /* Screen header with back button */
+    /* ==========================================
+       Fullscreen Modal System
+       ========================================== */
+
+    .modal {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(50px) saturate(180%);
+      -webkit-backdrop-filter: blur(50px) saturate(180%);
+      z-index: 300;
+      display: flex;
+      flex-direction: column;
+      transform: translateY(100%);
+      transition: transform 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+
+    .modal.active {
+      transform: translateY(0);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px;
+      padding-top: 54px;
+    }
+
+    .modal-close-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      background: rgba(0, 0, 0, 0.1);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .modal-close-btn svg {
+      width: 14px;
+      height: 14px;
+      stroke: rgba(0, 0, 0, 0.6);
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .modal-title {
+      font-size: 17px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.85);
+      text-align: center;
+      flex: 1;
+      margin-left: 30px; /* Balance the close button */
+    }
+
+    /* Night mode modal */
+    .iphone-frame.night .modal {
+      background: rgba(30, 30, 40, 0.7);
+    }
+
+    .iphone-frame.night .modal-close-btn {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .iphone-frame.night .modal-close-btn svg {
+      stroke: rgba(255, 255, 255, 0.8);
+    }
+
+    .iphone-frame.night .modal-title {
+      color: white;
+    }
+
+    .modal-content {
+      flex: 1;
+      padding: 0 16px 16px 16px;
+      overflow-y: auto;
+    }
+
+    /* Screen header with back button (for push navigation) */
     .screen-header {
       display: flex;
       align-items: center;
@@ -622,6 +737,638 @@
       align-items: center;
       gap: 6px;
     }
+
+    /* ==========================================
+       Settings Modal Styles
+       ========================================== */
+
+    /* Settings modal header buttons */
+    .settings-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px;
+      padding-top: 54px;
+    }
+
+    .settings-header-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .settings-header-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .settings-header-btn svg {
+      width: 16px;
+      height: 16px;
+      stroke: rgba(0, 0, 0, 0.7);
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .settings-header-btn.save svg {
+      stroke: #34C759;
+      stroke-width: 2.5;
+    }
+
+    /* Night mode header buttons */
+    .iphone-frame.night .settings-header-btn {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .iphone-frame.night .settings-header-btn svg {
+      stroke: rgba(255, 255, 255, 0.8);
+    }
+
+    .iphone-frame.night .settings-header-btn.save svg {
+      stroke: #30D158;
+    }
+
+    /* Settings Header Section - darker background */
+    .settings-header-section {
+      background: rgba(0, 0, 0, 0.08);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      padding-bottom: 16px;
+      margin-bottom: 12px;
+    }
+
+    .iphone-frame.night .settings-header-section {
+      background: rgba(0, 0, 0, 0.25);
+      border-bottom-color: rgba(255, 255, 255, 0.08);
+    }
+
+    /* Profile section */
+    .settings-profile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 8px 16px 12px;
+      gap: 6px;
+    }
+
+    .profile-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    }
+
+    .profile-name-row {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .profile-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.85);
+    }
+
+    .profile-edit-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
+    .profile-edit-btn svg {
+      width: 12px;
+      height: 12px;
+      stroke: rgba(0, 0, 0, 0.4);
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .iphone-frame.night .profile-name {
+      color: white;
+    }
+
+    .iphone-frame.night .profile-edit-btn svg {
+      stroke: rgba(255, 255, 255, 0.5);
+    }
+
+    /* Profile badges row */
+    .profile-badges {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 2px;
+    }
+
+    .profile-badge {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      background: rgba(0, 0, 0, 0.08);
+      border-radius: 6px;
+      padding: 4px 8px;
+      height: 22px;
+      box-sizing: border-box;
+    }
+
+    .profile-badge span {
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.7);
+      line-height: 1;
+    }
+
+    .profile-badge-icon {
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      object-fit: cover;
+    }
+
+    .profile-badge-icon:not(:first-child) {
+      margin-left: -4px;
+    }
+
+    .iphone-frame.night .profile-badge {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .iphone-frame.night .profile-badge span {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* Settings sections */
+    .settings-section {
+      padding: 0 12px;
+      margin-bottom: 12px;
+    }
+
+    .settings-section-title {
+      font-size: 11px;
+      font-weight: 500;
+      color: rgba(0, 0, 0, 0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+      padding-left: 4px;
+    }
+
+    .iphone-frame.night .settings-section-title {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .settings-card {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .iphone-frame.night .settings-card {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .settings-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .settings-row:last-child {
+      border-bottom: none;
+    }
+
+    .iphone-frame.night .settings-row {
+      border-bottom-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .settings-row-label {
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(0, 0, 0, 0.85);
+    }
+
+    .iphone-frame.night .settings-row-label {
+      color: white;
+    }
+
+    .settings-row-value {
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .iphone-frame.night .settings-row-value {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .settings-row-chevron {
+      width: 6px;
+      height: 12px;
+      stroke: rgba(0, 0, 0, 0.3);
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .iphone-frame.night .settings-row-chevron {
+      stroke: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Daily Limit Slider */
+    .slider-container {
+      padding: 4px 0;
+    }
+
+    .slider-value {
+      text-align: center;
+      font-size: 20px;
+      font-weight: 700;
+      color: rgba(0, 0, 0, 0.85);
+      margin-bottom: 8px;
+    }
+
+    .iphone-frame.night .slider-value {
+      color: white;
+    }
+
+    .slider-track {
+      position: relative;
+      height: 24px;
+      display: flex;
+      align-items: center;
+    }
+
+    .slider-input {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 4px;
+      background: rgba(0, 0, 0, 0.15);
+      border-radius: 2px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .slider-input::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 22px;
+      height: 22px;
+      background: white;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .iphone-frame.night .slider-input {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .slider-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 4px;
+    }
+
+    .slider-label {
+      font-size: 10px;
+      color: rgba(0, 0, 0, 0.4);
+    }
+
+    .iphone-frame.night .slider-label {
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    /* iOS Toggle Switch */
+    .toggle-switch {
+      position: relative;
+      width: 42px;
+      height: 26px;
+      background: rgba(0, 0, 0, 0.15);
+      border-radius: 26px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .toggle-switch.active {
+      background: #34C759;
+    }
+
+    .toggle-switch::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 22px;
+      height: 22px;
+      background: white;
+      border-radius: 50%;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .toggle-switch.active::after {
+      transform: translateX(16px);
+    }
+
+    .iphone-frame.night .toggle-switch {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .iphone-frame.night .toggle-switch.active {
+      background: #30D158;
+    }
+
+    /* Settings Footer - iOS 26 pill buttons */
+    .settings-footer {
+      padding: 12px;
+      padding-bottom: 28px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .settings-footer-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 16px;
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 2px solid;
+    }
+
+    .settings-footer-btn svg {
+      width: 13px;
+      height: 13px;
+      fill: currentColor;
+      stroke: none;
+    }
+
+    .settings-footer-btn.secondary {
+      background: rgba(59, 89, 152, 0.25);
+      color: #5B7DC1;
+      border-color: rgba(59, 89, 152, 0.5);
+    }
+
+    .settings-footer-btn.secondary:hover {
+      background: rgba(59, 89, 152, 0.35);
+    }
+
+    .settings-footer-btn.destructive {
+      background: rgba(180, 80, 50, 0.3);
+      color: #E86B4A;
+      border-color: rgba(180, 80, 50, 0.5);
+    }
+
+    .settings-footer-btn.destructive:hover {
+      background: rgba(180, 80, 50, 0.4);
+    }
+
+    /* Night mode footer buttons */
+    .iphone-frame.night .settings-footer-btn.secondary {
+      background: rgba(59, 89, 152, 0.3);
+      color: #7B9AD1;
+      border-color: rgba(91, 125, 193, 0.5);
+    }
+
+    .iphone-frame.night .settings-footer-btn.destructive {
+      background: rgba(180, 80, 50, 0.35);
+      color: #F08060;
+      border-color: rgba(232, 107, 74, 0.5);
+    }
+
+    /* Settings menu items - Simple iOS 26 style */
+    .settings-menu {
+      padding: 0 12px;
+    }
+
+    .settings-menu-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      margin-bottom: 6px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .settings-menu-item:hover {
+      background: rgba(255, 255, 255, 0.22);
+    }
+
+    .settings-menu-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .iphone-frame.night .settings-menu-item {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .iphone-frame.night .settings-menu-item:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .settings-menu-item-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(0, 0, 0, 0.75);
+    }
+
+    .iphone-frame.night .settings-menu-item-label {
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .settings-menu-item-right {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .settings-menu-item-value {
+      font-size: 12px;
+      color: rgba(0, 0, 0, 0.4);
+    }
+
+    .iphone-frame.night .settings-menu-item-value {
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .settings-menu-item-chevron {
+      width: 5px;
+      height: 9px;
+      stroke: rgba(0, 0, 0, 0.25);
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .iphone-frame.night .settings-menu-item-chevron {
+      stroke: rgba(255, 255, 255, 0.25);
+    }
+
+    /* ==========================================
+       Blocked Apps Sub-Modal
+       ========================================== */
+
+    .sub-modal-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0);
+      z-index: 310;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+
+    .sub-modal-overlay.active {
+      background: rgba(0, 0, 0, 0.4);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .sub-modal {
+      width: calc(100% - 48px);
+      max-height: 60%;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(40px) saturate(180%);
+      -webkit-backdrop-filter: blur(40px) saturate(180%);
+      border-radius: 20px;
+      transform: scale(0.9);
+      opacity: 0;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .sub-modal-overlay.active .sub-modal {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    .iphone-frame.night .sub-modal {
+      background: rgba(45, 45, 55, 0.9);
+    }
+
+    .sub-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .iphone-frame.night .sub-modal-header {
+      border-bottom-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .sub-modal-title {
+      font-size: 17px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.85);
+    }
+
+    .iphone-frame.night .sub-modal-title {
+      color: white;
+    }
+
+    .sub-modal-close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: rgba(0, 0, 0, 0.1);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .sub-modal-close svg {
+      width: 12px;
+      height: 12px;
+      stroke: rgba(0, 0, 0, 0.6);
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .iphone-frame.night .sub-modal-close {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .iphone-frame.night .sub-modal-close svg {
+      stroke: rgba(255, 255, 255, 0.7);
+    }
+
+    .sub-modal-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 8px 0;
+    }
+
+    /* Blocked app list item */
+    .blocked-app-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+    }
+
+    .blocked-app-item-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .blocked-app-item-name {
+      font-size: 16px;
+      font-weight: 500;
+      color: rgba(0, 0, 0, 0.85);
+    }
+
+    .iphone-frame.night .blocked-app-item-name {
+      color: white;
+    }
   </style>
 </head>
 <body>
@@ -682,16 +1429,21 @@
               <!-- Top row: settings -->
               <div class="status-header">
                 <div class="time-display">
-                  <div class="time-row">
-                    <span class="time-value">32m</span>
+                  <div class="badges-row">
+                    <div class="streak-badge">
+                      <span class="streak-value">☀️ 19</span>
+                    </div>
                     <div class="blocked-apps">
                       <img src="/assets/icons/instagram.png" alt="Instagram" class="blocked-app-icon">
                       <img src="/assets/icons/facebook.png" alt="Facebook" class="blocked-app-icon">
                     </div>
                   </div>
+                  <div class="time-row">
+                    <span class="time-value">32m</span>
+                  </div>
                   <div class="time-label">Screen time today</div>
                 </div>
-                <div class="settings-btn" onclick="navPush('settingsScreen')">
+                <div class="settings-btn" onclick="openModal('settingsModal')">
                   <svg viewBox="0 0 24 24">
                     <circle cx="12" cy="12" r="3"/>
                     <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
@@ -749,87 +1501,136 @@
         </div>
       </div>
 
-      <!-- Settings Screen -->
-      <div class="nav-screen" id="settingsScreen">
-        <div class="screen-header">
-          <button class="screen-back-btn" onclick="navPop()">
-            <svg viewBox="0 0 12 20">
-              <polyline points="10 2 2 10 10 18"/>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal" id="settingsModal">
+      <!-- Header Section with darker background -->
+      <div class="settings-header-section">
+        <!-- Header with X (left) and checkmark (right) -->
+        <div class="settings-modal-header">
+          <button class="settings-header-btn" onclick="closeModal('settingsModal')">
+            <svg viewBox="0 0 24 24">
+              <line x1="18" y1="6" x2="6" y2="18"/>
+              <line x1="6" y1="6" x2="18" y2="18"/>
             </svg>
-            Back
           </button>
-          <span class="screen-title">Settings</span>
+          <button class="settings-header-btn save" onclick="closeModal('settingsModal')">
+            <svg viewBox="0 0 24 24">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </button>
         </div>
-        <div class="screen-content">
-          <div class="settings-list">
-            <div class="settings-group">
-              <div class="settings-item" onclick="navPush('dailyLimitScreen')">
-                <div class="settings-item-left">
-                  <div class="settings-item-icon" style="background: #34C759;">
-                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                  </div>
-                  <span>Daily Limit</span>
-                </div>
-                <div class="settings-item-value">
-                  2 hours
-                  <svg class="settings-item-chevron" viewBox="0 0 8 14"><polyline points="1 1 7 7 1 13"/></svg>
-                </div>
-              </div>
-              <div class="settings-item">
-                <div class="settings-item-left">
-                  <div class="settings-item-icon" style="background: #FF9500;">
-                    <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                  </div>
-                  <span>Blocked Apps</span>
-                </div>
-                <div class="settings-item-value">
-                  2 apps
-                  <svg class="settings-item-chevron" viewBox="0 0 8 14"><polyline points="1 1 7 7 1 13"/></svg>
-                </div>
-              </div>
+
+        <!-- Profile Section -->
+        <div class="settings-profile">
+          <img src="/public/assets/clif.jpg" alt="Clif" class="profile-avatar">
+          <div class="profile-name-row">
+            <span class="profile-name">Josh</span>
+            <button class="profile-edit-btn">
+              <svg viewBox="0 0 24 24">
+                <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>
+              </svg>
+            </button>
+          </div>
+          <div class="profile-badges">
+            <div class="profile-badge">
+              <span>☀️ 19</span>
             </div>
-            <div class="settings-group">
-              <div class="settings-item">
-                <div class="settings-item-left">
-                  <div class="settings-item-icon" style="background: #5856D6;">
-                    <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-                  </div>
-                  <span>Notifications</span>
-                </div>
-                <svg class="settings-item-chevron" viewBox="0 0 8 14"><polyline points="1 1 7 7 1 13"/></svg>
-              </div>
-              <div class="settings-item">
-                <div class="settings-item-left">
-                  <div class="settings-item-icon" style="background: #007AFF;">
-                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-                  </div>
-                  <span>Preferences</span>
-                </div>
-                <svg class="settings-item-chevron" viewBox="0 0 8 14"><polyline points="1 1 7 7 1 13"/></svg>
-              </div>
+            <div class="profile-badge">
+              <img src="/assets/icons/instagram.png" alt="Instagram" class="profile-badge-icon">
+              <img src="/assets/icons/facebook.png" alt="Facebook" class="profile-badge-icon">
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Daily Limit Screen (nested navigation example) -->
-      <div class="nav-screen" id="dailyLimitScreen">
-        <div class="screen-header">
-          <button class="screen-back-btn" onclick="navPop()">
-            <svg viewBox="0 0 12 20">
-              <polyline points="10 2 2 10 10 18"/>
-            </svg>
-            Settings
-          </button>
-          <span class="screen-title">Daily Limit</span>
+      <!-- Settings Content -->
+      <div class="modal-content">
+        <!-- Menu Items - Simple without icons -->
+        <div class="settings-menu">
+          <!-- Limit -->
+          <div class="settings-menu-item">
+            <span class="settings-menu-item-label">Limit</span>
+            <div class="settings-menu-item-right">
+              <span class="settings-menu-item-value">2h</span>
+              <svg class="settings-menu-item-chevron" viewBox="0 0 8 14">
+                <polyline points="1 1 7 7 1 13"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Blocked Apps -->
+          <div class="settings-menu-item" onclick="openSubModal('blockedAppsModal')">
+            <span class="settings-menu-item-label">Blocked Apps</span>
+            <div class="settings-menu-item-right">
+              <span class="settings-menu-item-value">2 apps</span>
+              <svg class="settings-menu-item-chevron" viewBox="0 0 8 14">
+                <polyline points="1 1 7 7 1 13"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Shield -->
+          <div class="settings-menu-item">
+            <span class="settings-menu-item-label">Shield</span>
+            <div class="settings-menu-item-right">
+              <span class="settings-menu-item-value">On</span>
+              <svg class="settings-menu-item-chevron" viewBox="0 0 8 14">
+                <polyline points="1 1 7 7 1 13"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Notifications -->
+          <div class="settings-menu-item">
+            <span class="settings-menu-item-label">Notifications</span>
+            <div class="settings-menu-item-right">
+              <span class="settings-menu-item-value">On</span>
+              <svg class="settings-menu-item-chevron" viewBox="0 0 8 14">
+                <polyline points="1 1 7 7 1 13"/>
+              </svg>
+            </div>
+          </div>
         </div>
-        <div class="screen-content">
-          <div class="settings-list">
-            <div class="settings-group">
-              <div class="settings-item">
-                <span>Current limit</span>
-                <span class="settings-item-value">2 hours</span>
-              </div>
+      </div>
+
+      <!-- Footer Buttons -->
+      <div class="settings-footer">
+        <button class="settings-footer-btn secondary">
+          <svg viewBox="0 0 24 24">
+            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+          </svg>
+          Anchor
+        </button>
+        <button class="settings-footer-btn destructive">
+          <svg viewBox="0 0 24 24">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M9 18l3 3 3-3"/>
+          </svg>
+          Blow Away
+        </button>
+      </div>
+
+      <!-- Blocked Apps Sub-Modal -->
+      <div class="sub-modal-overlay" id="blockedAppsModal" onclick="closeSubModal('blockedAppsModal')">
+        <div class="sub-modal" onclick="event.stopPropagation()">
+          <div class="sub-modal-header">
+            <span class="sub-modal-title">Blocked Apps</span>
+            <button class="sub-modal-close" onclick="closeSubModal('blockedAppsModal')">
+              <svg viewBox="0 0 24 24">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            </button>
+          </div>
+          <div class="sub-modal-content">
+            <div class="blocked-app-item">
+              <img src="/assets/icons/instagram.png" alt="Instagram" class="blocked-app-item-icon">
+              <span class="blocked-app-item-name">Instagram</span>
+            </div>
+            <div class="blocked-app-item">
+              <img src="/assets/icons/facebook.png" alt="Facebook" class="blocked-app-item-icon">
+              <span class="blocked-app-item-name">Facebook</span>
             </div>
           </div>
         </div>
@@ -910,18 +1711,13 @@
       // Add to stack
       navStack.push(screenId);
 
-      // Animate current screen (push back)
-      if (currentScreen.classList.contains('home')) {
-        currentScreen.classList.add('pushed');
-      } else {
-        currentScreen.classList.remove('active');
-        currentScreen.classList.add('pushed');
-      }
+      // Animate current screen (push back slightly)
+      currentScreen.classList.add('pushed');
 
       // Show overlay
       overlay.classList.add('active');
 
-      // Animate new screen in
+      // Animate new screen in from right
       newScreen.classList.add('active');
     }
 
@@ -937,16 +1733,11 @@
       const previousScreen = document.getElementById(previousScreenId);
       const overlay = document.getElementById('screenOverlay');
 
-      // Animate current screen out
+      // Animate current screen out (slide right)
       currentScreen.classList.remove('active');
 
-      // Animate previous screen back
-      if (previousScreen.classList.contains('home')) {
-        previousScreen.classList.remove('pushed');
-      } else {
-        previousScreen.classList.remove('pushed');
-        previousScreen.classList.add('active');
-      }
+      // Animate previous screen back to center
+      previousScreen.classList.remove('pushed');
 
       // Hide overlay if back to home
       if (navStack.length === 1) {
@@ -979,6 +1770,88 @@
         homeScreen.classList.add('pushed');
         targetScreen.classList.add('active');
         overlay.classList.add('active');
+      }
+    }
+
+    // ==========================================
+    // Modal System
+    // ==========================================
+
+    /**
+     * Open a modal by ID
+     * @param {string} modalId - The ID of the modal to open
+     */
+    function openModal(modalId) {
+      const modal = document.getElementById(modalId);
+      if (modal) {
+        modal.classList.add('active');
+      }
+    }
+
+    /**
+     * Close a modal by ID
+     * @param {string} modalId - The ID of the modal to close
+     */
+    function closeModal(modalId) {
+      const modal = document.getElementById(modalId);
+      if (modal) {
+        modal.classList.remove('active');
+      }
+    }
+
+    // ==========================================
+    // Settings Functions
+    // ==========================================
+
+    /**
+     * Update slider display value
+     * Slider has 24 steps: 1-6 = 10min-60min (10min steps), 7-24 = 1h10m-4h (10min steps)
+     * @param {number} value - Slider value (1-24)
+     */
+    function updateSliderValue(value) {
+      const minutes = value * 10; // Each step is 10 minutes
+      const hours = Math.floor(minutes / 60);
+      const mins = minutes % 60;
+
+      let display;
+      if (hours === 0) {
+        display = `${mins}min`;
+      } else if (mins === 0) {
+        display = `${hours}h`;
+      } else {
+        display = `${hours}h ${mins}m`;
+      }
+
+      document.getElementById('sliderValue').textContent = display;
+    }
+
+    /**
+     * Toggle switch state
+     * @param {HTMLElement} element - The toggle switch element
+     */
+    function toggleSwitch(element) {
+      element.classList.toggle('active');
+    }
+
+    /**
+     * Open a sub-modal
+     * @param {string} modalId - The ID of the sub-modal to open
+     */
+    function openSubModal(modalId) {
+      const modal = document.getElementById(modalId);
+      if (modal) {
+        modal.classList.add('active');
+      }
+    }
+
+    /**
+     * Close a sub-modal
+     * @param {string} modalId - The ID of the sub-modal to close
+     */
+    function closeSubModal(modalId) {
+      const modal = document.getElementById(modalId);
+      if (modal) {
+        modal.classList.remove('active');
       }
     }
   </script>
