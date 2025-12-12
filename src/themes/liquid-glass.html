@@ -140,20 +140,40 @@
 
     /* Liquid Glass specific styles */
     .lg-tab-bar {
-      background: rgba(60, 60, 60, 0.7);
+      background: rgba(255, 255, 255, 0.25);
       backdrop-filter: blur(40px);
       -webkit-backdrop-filter: blur(40px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
     }
 
     .lg-tab-item {
-      color: rgba(255, 255, 255, 0.6);
+      color: rgba(0, 0, 0, 0.5);
     }
 
     .lg-tab-item.active {
+      color: rgba(0, 0, 0, 0.85);
+      background: rgba(255, 255, 255, 0.35);
+    }
+
+    /* Night mode tab bar - darker for contrast */
+    .iphone-frame.night .lg-tab-bar {
+      background: rgba(30, 30, 35, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .iphone-frame.night .lg-tab-item {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .iphone-frame.night .lg-tab-item.active {
       color: white;
-      background: rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.15);
     }
     
     .lg-card {
@@ -201,7 +221,7 @@
     }
 
     .time-display {
-      color: white;
+      color: rgba(0, 0, 0, 0.85);
     }
 
     .time-value {
@@ -214,8 +234,17 @@
     .time-label {
       font-size: 11px;
       font-weight: 400;
-      opacity: 0.8;
+      color: rgba(0, 0, 0, 0.5);
       margin-top: 2px;
+    }
+
+    /* Night mode card text */
+    .iphone-frame.night .time-display {
+      color: white;
+    }
+
+    .iphone-frame.night .time-label {
+      color: rgba(255, 255, 255, 0.7);
     }
 
     /* Blocked apps icons */
@@ -265,9 +294,13 @@
     .settings-btn svg {
       width: 18px;
       height: 18px;
-      stroke: rgba(255, 255, 255, 0.8);
+      stroke: rgba(0, 0, 0, 0.6);
       fill: none;
       stroke-width: 1.5;
+    }
+
+    .iphone-frame.night .settings-btn svg {
+      stroke: rgba(255, 255, 255, 0.8);
     }
 
     .progress-container {
@@ -282,6 +315,10 @@
 
     .progress-label {
       font-size: 10px;
+      color: rgba(0, 0, 0, 0.5);
+    }
+
+    .iphone-frame.night .progress-label {
       color: rgba(255, 255, 255, 0.7);
     }
 
@@ -589,7 +626,7 @@
 </head>
 <body>
   <!-- Back to variants -->
-  <a href="/index.html" class="back-btn">
+  <a href="../../index.html" class="back-btn">
     <svg viewBox="0 0 24 24">
       <polyline points="15 18 9 12 15 6"/>
     </svg>
