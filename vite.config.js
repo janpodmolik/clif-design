@@ -3,6 +3,7 @@ import tailwindcss from '@tailwindcss/vite'
 import { resolve } from 'path'
 
 export default defineConfig({
+  base: '/clif-design/',
   plugins: [tailwindcss()],
   build: {
     rollupOptions: {
